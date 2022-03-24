@@ -18,7 +18,7 @@ const routesList = [{
 
 // getting components from routes list
 const routes = routesList.map(route => {
-    return <li className='navbar__link'>
+    return <li key={route.name} className='navbar__link'>
         <Link to={route.url}>
             {route.name}
         </Link>
