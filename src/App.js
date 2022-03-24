@@ -23,7 +23,6 @@ const setToken = (userToken) => {
 const getToken = () => {
   const tokenString = localStorage.getItem('token');
   const userToken = JSON.parse(tokenString);
-  console.log(userToken);
   return userToken;
 }
 
@@ -32,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar token={getToken()} />
+        <Navbar token={getToken()} setToken={ setToken } />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login setToken={ setToken } />} />

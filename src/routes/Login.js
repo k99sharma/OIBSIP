@@ -32,6 +32,7 @@ function Login(props){
             alert(res.message);
         }else{
             props.setToken(res.data);
+
             navigate('/');
         }
     }

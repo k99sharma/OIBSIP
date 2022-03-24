@@ -12,7 +12,7 @@ async function signupUser(credentials){
     .then(res => res.json())
 }
 
-function Signup() {
+function Signup(props) {
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
