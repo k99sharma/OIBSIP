@@ -36,7 +36,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login setToken={ setToken } />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/signup' element={<Signup setToken={ setToken } />} />
           <Route path='/menu' element={<Menu />} />
         </Routes>
       </BrowserRouter>

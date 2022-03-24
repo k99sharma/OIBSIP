@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 async function signupUser(credentials){
     return fetch('http://localhost:8080/mountpizza/users/create', {
@@ -19,10 +19,12 @@ function Signup() {
     const [phoneNumber, setPhoneNumber] = useState();
     const [password, setPassword] = useState();
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const data = await signupUser({
+        const res = await signupUser({
             firstName,
             lastName,
             email,
@@ -30,7 +32,12 @@ function Signup() {
             password
         });
 
-        console.log(data);
+        if(res.error){
+            alert(res.message);
+        }else{
+            props.setToken(res.data);
+            navigate('/');
+        }
     }
 
     return (
