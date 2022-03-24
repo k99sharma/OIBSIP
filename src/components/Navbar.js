@@ -1,8 +1,8 @@
 // importing built-in components
 import { Link } from 'react-router-dom';
 
-// routes list
-const routesList = [{
+// routes1 list
+const routesList1 = [{
     url: '/menu',
     name: 'Menu'
 },
@@ -15,28 +15,60 @@ const routesList = [{
     name: 'Login',
 }];
 
+// routes2 list
+const routesList2 = [{
+    url: '/menu',
+    name: 'Menu'
+},];
 
-// getting components from routes list
-const routes = routesList.map(route => {
-    return <li key={route.name} className='navbar__link'>
-        <Link to={route.url}>
-            {route.name}
-        </Link>
-    </li>
+// routes to show before authenticated
+const routesBeforeAuthentication = routesList1.map(route => {
+    return (
+        <li key={route.name} className='navbar__link'>
+            <Link to={route.url}>
+                {route.name}
+            </Link>
+        </li>
+    )
+})
+
+// routes to show after authentication
+const routesAfterAuthentication = routesList2.map(route => {
+    return (
+        <>
+            <li key={route.name} className='navbar__link'>
+                <Link to={route.url}>
+                    {route.name}
+                </Link>
+            </li>
+
+            <li>
+                Logout
+            </li>
+        </>
+    )
 })
 
 
 // navbar component
-function Navbar(){
-    return(
+function Navbar(props) {
+    return (
         <div className="navbar">
             {/* Banner */}
             <Link to='/'>
                 <strong>Mount Pizza</strong>
             </Link>
-            
+
             {/* getting routes list */}
-            <ul>{routes}</ul>
+            <ul>
+                {
+                    props.token
+                        ?
+                    routesBeforeAuthentication
+                        :
+                    routesAfterAuthentication
+                }
+            </ul>
         </div>
     );
 }

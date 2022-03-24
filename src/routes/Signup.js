@@ -39,7 +39,6 @@ function Signup() {
             <h5>
                 Already got an account? <Link to='/login'>Login</Link>
             </h5>
-
             <br />
 
             <form onSubmit = {handleSubmit} method='POST' autoComplete='off'>

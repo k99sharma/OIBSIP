@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
+// function to login user
 async function loginUser(credentials){
     return fetch('http://localhost:8080/mountpizza/auth/login', {
         method: 'POST',
@@ -9,13 +11,15 @@ async function loginUser(credentials){
         body: JSON.stringify(credentials)
     })
         .then(data => data.json());
-
 }
 
-function Login(){
+// login component
+function Login(props){
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const navigate = useNavigate();
 
+    // submit handler
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -23,13 +27,12 @@ function Login(){
             email,
             password
         });
-        let token = null;
+
         if(res.error){
-            console.log(res.message);
-            console.log(res.status);
+            alert(res.message);
         }else{
-            token = res.data.token;
-            console.log(token);
+            props.setToken(res.data);
+            navigate('/');
         }
     }
 
