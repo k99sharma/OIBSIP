@@ -1,16 +1,6 @@
 import { useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
-
-const loginUser = async (credentails) => {
-    return fetch('http://localhost:8000/mountpizza/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentails),
-    })
-    .then(res => res.json())
-}
+import { loginUser } from '../../utils/helper';
 
 export default function Login()
 {
