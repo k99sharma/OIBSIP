@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import {Link, useNavigate} from 'react-router-dom';
+
+import AuthContext from '../../store/auth-context';
+import { signupUser } from '../../utils/helper';
 
 export default function Signup()
 {
@@ -8,15 +12,32 @@ export default function Signup()
     const [phoneNumber, setPhoneNumber] = useState();
     const [password, setPassword] = useState();
 
-    const handleSubmit = (event) => {
+    const authCtx = useContext(AuthContext);
+    const navigator = useNavigate();
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Submit')
+        const res = await signupUser({
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            password
+        });
+
+        if(res.error){
+            alert(res.message);
+        }else{
+            authCtx.login(res.data);
+            navigator('/', {replace: true}); // redirect user afer sign up
+        }
     }
 
     return(
         <>
             <div>
                 Signup Page
+                <p>Already got an account? <Link to='/login'>Login</Link></p>
             </div><br />
 
             <form onSubmit = {handleSubmit} autoComplete="off">

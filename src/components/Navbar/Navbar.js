@@ -1,27 +1,29 @@
-import { Link } from "react-router-dom";
-
-const links = [
-{
-    name: 'Login',
-    path: '/login',
-},
-{
-    name: 'Signup',
-    path: '/signup',
-},];
-
-const navLinks = links.map(link => {
-        return( 
-        <li key={`${link.name}-link`}>
-            <Link to={link.path}>
-                {link.name}
-            </Link>
-        </li>
-)});
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 
-export default function Navbar(){
-    return(
+import AuthContext from '../../store/auth-context';
+import { logoutUser } from "../../utils/helper";
+
+
+export default function Navbar() {
+    const navigator = useNavigate();
+    const authCtx = useContext(AuthContext);
+    const isLoggedIn = authCtx.isLoggedIn;
+
+    const handleLogout = async () => {
+        const token = authCtx.token;
+        const res = await logoutUser(token);
+        if(res.error){
+            alert(res.message);
+        }
+        else{
+            authCtx.logout();
+            navigator('/', {replace: true});  // redirect user after logout
+        }
+    }
+
+    return (
         <>
             <div>
                 <Link to='/'>
@@ -30,7 +32,44 @@ export default function Navbar(){
             </div>
 
             <ul>
-                { navLinks }
+                {
+                    !isLoggedIn
+                    &&
+                    <li>
+                        <Link to='/login'>
+                            Login
+                        </Link>
+                    </li>
+
+                }
+
+                {
+                    !isLoggedIn
+                    &&
+                    <li>
+                        <Link to='/signup'>
+                            Signup
+                        </Link>
+                    </li>
+                }
+                {
+                    isLoggedIn
+                    &&
+                    <li>
+                        <Link to='/menu'>
+                            Menu
+                        </Link>
+                    </li>
+                }
+                {
+                    isLoggedIn
+                    &&
+                    <li>
+                        <button onClick={handleLogout}>
+                            Logout
+                        </button>
+                    </li>
+                }
             </ul>
         </>
     );
