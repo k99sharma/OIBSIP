@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 
 const links = [
 {
+    name: 'Menu',
+    path: '/menu',
+},
+{
     name: 'Login',
     path: '/login',
 },

@@ -9,6 +9,7 @@ import Navbar from './components/Navbar/Navbar';
 
 // importing routes
 import Home from './Routes/Home/Home';
+import Menu from './Routes/Menu/Menu';
 import Signup from './Routes/Signup/Signup';
 import Login from './Routes/Login/Login';
 import NotFound from './Routes/404/404';
@@ -21,6 +22,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path='/' element={ <Home /> } />
+          <Route exact path='/menu' element={<Menu />} />
           <Route exact path='/login' element={ <Login /> } />
           <Route exact path='/signup' element={ <Signup /> } />
           <Route path='*' element={<NotFound />} />
