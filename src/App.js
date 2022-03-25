@@ -3,6 +3,8 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from './store/auth-context';
 
 // importing components
 import Navbar from './components/Navbar/Navbar';
@@ -16,15 +18,22 @@ import NotFound from './Routes/404/404';
 
 
 function App() {
+  const authCtx = useContext(AuthContext);
   return (
     <>
       <Router>
         <Navbar />
         <Routes>
           <Route exact path='/' element={ <Home /> } />
-          <Route exact path='/menu' element={<Menu />} />
-          <Route exact path='/login' element={ <Login /> } />
-          <Route exact path='/signup' element={ <Signup /> } />
+          {
+            authCtx.isLoggedIn && <Route exact path='/menu' element={<Menu />} />
+          }
+          {
+            !authCtx.isLoggedIn && <Route exact path='/login' element={ <Login /> } />
+          }
+          {
+            !authCtx.isLoggedIn && <Route exact path='/signup' element={ <Signup /> } />
+          }
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>

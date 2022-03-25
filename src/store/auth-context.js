@@ -16,7 +16,7 @@ export const AuthContextProvider = (props) => {
         setToken(savedToken);
     }, [])
 
-    const userIsLoggedIn = !!token;
+    const userIsLoggedIn = token === null ? false : true;
 
     const loginHandler = (token) => {
         setToken(token);
@@ -29,7 +29,7 @@ export const AuthContextProvider = (props) => {
         setToken(null);
         // set token in local storage as null
         alert('Logged Out!');
-        localStorage.setItem('token', null);
+        localStorage.clear('token');
     }
 
     const contextValue = {
