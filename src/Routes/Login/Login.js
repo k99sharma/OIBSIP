@@ -1,13 +1,37 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "../../store/auth-context";
+
+const loginUser = async (credentails) => {
+    return fetch('http://localhost:8000/mountpizza/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentails),
+    })
+    .then(res => res.json())
+}
 
 export default function Login()
 {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const authCtx = useContext(AuthContext);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Submit');
+
+        const res = await loginUser({
+            email,
+            password
+        });
+
+        if(res.error){
+            alert(res.message);
+        }else{
+            // calling context login handler
+            authCtx.login(res.data);
+        }
     }
 
     return(

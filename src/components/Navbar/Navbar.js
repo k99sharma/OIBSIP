@@ -2,11 +2,31 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from '../../store/auth-context';
 
+const logoutUser = async (token) => {
+    return fetch('http://localhost:8000/mountpizza/auth/logout', {
+        method: 'POST',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json);
+}
+
 
 export default function Navbar() {
     const authCtx = useContext(AuthContext);
     const isLoggedIn = authCtx.isLoggedIn;
 
+    const handleLogout = async () => {
+        const token = authCtx.token;
+        const res = await logoutUser(token);
+        if(res.error){
+            alert(res.message);
+        }
+        else{
+            authCtx.logout();
+        }
+    }
 
     return (
         <>
@@ -50,7 +70,9 @@ export default function Navbar() {
                     isLoggedIn
                     &&
                     <li>
-                        Logout
+                        <button onClick={handleLogout}>
+                            Logout
+                        </button>
                     </li>
                 }
             </ul>
