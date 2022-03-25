@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from 'react-router-dom';
 
 export default function Signup()
 {
@@ -17,6 +18,7 @@ export default function Signup()
         <>
             <div>
                 Signup Page
+                <p>Already got an account? <Link to='/login'>Login</Link></p>
             </div><br />
 
             <form onSubmit = {handleSubmit} autoComplete="off">
