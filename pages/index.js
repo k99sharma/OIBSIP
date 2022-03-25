@@ -1,7 +1,7 @@
-
-
 export default function Home() {
   return (
-    <h1>This is Next.js application</h1>
+    <h1 className="text-3xl font-bold underline">
+      This is Next.js
+    </h1>
   )
 }
