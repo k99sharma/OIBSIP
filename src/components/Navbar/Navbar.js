@@ -1,10 +1,13 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+
 import AuthContext from '../../store/auth-context';
 import { logoutUser } from "../../utils/helper";
 
 
 export default function Navbar() {
+    const navigator = useNavigate();
     const authCtx = useContext(AuthContext);
     const isLoggedIn = authCtx.isLoggedIn;
 
@@ -16,6 +19,7 @@ export default function Navbar() {
         }
         else{
             authCtx.logout();
+            navigator('/', {replace: true});  // redirect user after logout
         }
     }
 
