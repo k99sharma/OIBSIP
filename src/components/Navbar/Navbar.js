@@ -1,31 +1,14 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
-const links = [
-{
-    name: 'Menu',
-    path: '/menu',
-},
-{
-    name: 'Login',
-    path: '/login',
-},
-{
-    name: 'Signup',
-    path: '/signup',
-},];
-
-const navLinks = links.map(link => {
-        return( 
-        <li key={`${link.name}-link`}>
-            <Link to={link.path}>
-                {link.name}
-            </Link>
-        </li>
-)});
+import AuthContext from '../../store/auth-context';
 
 
-export default function Navbar(){
-    return(
+export default function Navbar() {
+    const authCtx = useContext(AuthContext);
+    const isLoggedIn = authCtx.isLoggedIn;
+
+
+    return (
         <>
             <div>
                 <Link to='/'>
@@ -34,7 +17,42 @@ export default function Navbar(){
             </div>
 
             <ul>
-                { navLinks }
+                {
+                    !isLoggedIn
+                    &&
+                    <li>
+                        <Link to='/login'>
+                            Login
+                        </Link>
+                    </li>
+
+                }
+
+                {
+                    !isLoggedIn
+                    &&
+                    <li>
+                        <Link to='/signup'>
+                            Signup
+                        </Link>
+                    </li>
+                }
+                {
+                    isLoggedIn
+                    &&
+                    <li>
+                        <Link to='/menu'>
+                            Menu
+                        </Link>
+                    </li>
+                }
+                {
+                    isLoggedIn
+                    &&
+                    <li>
+                        Logout
+                    </li>
+                }
             </ul>
         </>
     );
