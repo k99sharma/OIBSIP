@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import jwt from 'jwt-decode';
 
 const AuthContext = React.createContext({
     token: '',
+    user: {},
     isLoggedIn: false,
     login: () => { },
     logout: () => { },
@@ -17,6 +19,9 @@ export const AuthContextProvider = (props) => {
     }, [])
 
     const userIsLoggedIn = token === null ? false : true;
+
+    // decode payload aka token
+    const userData = token === null ? {} : jwt(token);
 
     const loginHandler = (token) => {
         setToken(token);
@@ -34,6 +39,7 @@ export const AuthContextProvider = (props) => {
 
     const contextValue = {
         token: token,
+        user: userData,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
         logout: logoutHandler,

@@ -10,6 +10,7 @@ export default function Navbar() {
     const navigator = useNavigate();
     const authCtx = useContext(AuthContext);
     const isLoggedIn = authCtx.isLoggedIn;
+    const role = authCtx.user.role;
 
     const handleLogout = async () => {
         const token = authCtx.token;
@@ -53,6 +54,19 @@ export default function Navbar() {
                     </li>
                 }
                 {
+                    role === 'ADMIN'
+                    &&
+                    isLoggedIn
+                    &&
+                    <li>
+                        <Link to='/dashboard'>
+                            Dashboard
+                        </Link>
+                    </li>
+                }
+                {
+                    role === 'CUST'
+                    &&
                     isLoggedIn
                     &&
                     <li>
@@ -61,7 +75,9 @@ export default function Navbar() {
                         </Link>
                     </li>
                 }
-                                {
+                {
+                    role === 'CUST'
+                    &&
                     isLoggedIn
                     &&
                     <li>
