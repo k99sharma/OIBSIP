@@ -37,13 +37,11 @@ export default function Cart() {
         }
 
         fetchCartItems(authCtx.token);
-    }, [])
+    }, [isOrderPlaced])
 
     useEffect(() => {
         setPrice(calculateOrderPrice(items));
     }, [items])
-
-    useEffect(() => {}, [isOrderPlaced])
 
     return (
         <>
