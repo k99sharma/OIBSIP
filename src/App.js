@@ -34,6 +34,9 @@ function App() {
           {
             !authCtx.isLoggedIn && <Route exact path='/signup' element={ <Signup /> } />
           }
+          {
+            !authCtx.isLoggedIn && <Route exact path='/cart' element={ <Cart /> } />
+          }
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>

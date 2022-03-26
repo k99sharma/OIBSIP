@@ -1,7 +1,57 @@
 import { useEffect, useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
 
-import { getMenu } from "../../utils/helper";
+import { getMenu, addItemToCart } from "../../utils/helper";
+
+// add to cart button 
+function AddToCart(props){
+    const [quantity, setQuantity] = useState(0);
+    
+    const handleAddToCart = async () => {
+        const res = await addItemToCart(props.token, props.itemId, quantity);
+
+        if(res.error){
+            alert(res.message);
+        }else{
+            alert('Item added in cart');
+
+        }
+    }
+
+    const increaseQuantity = () => {
+        const newQuantity = quantity + 1;
+        if(newQuantity > 10)
+            newQuantity = 10;
+
+        setQuantity(newQuantity);
+    }
+
+    const decreaseQuantity = () => {
+        const newQuantity = quantity-1;
+        if(newQuantity < 0)
+            newQuantity = 0;
+
+        setQuantity(newQuantity);
+    }
+
+    return(
+        <>
+            <button onClick={ handleAddToCart }>
+                Add To Cart
+            </button>
+
+            <div>
+                <button onClick={ increaseQuantity }>
+                    +
+                </button>
+                Quantity: { quantity }
+                <button onClick={ decreaseQuantity }>
+                    -
+                </button>
+            </div>
+        </>
+    );
+}
 
 
 export default function Menu() {
@@ -47,6 +97,9 @@ export default function Menu() {
                             </div>
                             <div>
                                 Price: { item.price }
+                            </div>
+                            <div>
+                                <AddToCart itemId = {item._id} token = {authCtx.token} />
                             </div>
                             <br />
                         </div>
