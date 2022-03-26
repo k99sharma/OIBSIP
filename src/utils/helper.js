@@ -67,3 +67,15 @@ export const getCartItems = async (token) => {
     })
     .then(data => data.json());
 }
+
+
+// function to calculate order price
+export const calculateOrderPrice = (items) => {
+    let price = 0;
+
+    for (let i = 0; i < items.length; i++) {
+        price += (items[i].item.price * items[i].quantity);
+    }
+
+    return price;
+}
