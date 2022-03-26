@@ -79,3 +79,29 @@ export const calculateOrderPrice = (items) => {
 
     return price;
 }
+
+
+// function to place order 
+export const placeOrder = async (amount, token) => {
+    const data = await fetch(`http://localhost:8000/mountpizza/orders/create?orderPrice=${amount}`, {
+        method: 'POST',
+        headers: {
+            'x-auth-token': token
+        }
+    })
+    return await data.json()
+}
+
+
+// function to verify payment
+export const verifyPayment = async (token, data) => {
+    return fetch('http://localhost:8000/mountpizza/orders/payment/verify', {
+        method: 'POST',
+        headers: {
+            'x-auth-token': token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(data => data.json());
+}
