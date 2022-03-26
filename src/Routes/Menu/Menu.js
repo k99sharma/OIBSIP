@@ -6,6 +6,15 @@ import { getMenu, addItemToCart } from "../../utils/helper";
 // add to cart button 
 function AddToCart(props){
     const [quantity, setQuantity] = useState(0);
+    const [isAddedToCart, setIsAddedToCart] = useState(false);
+
+    useEffect(()=>{
+        if(isAddedToCart === true){
+            setQuantity(0);
+            setIsAddedToCart(false);
+        }
+    }, [isAddedToCart])
+    
     
     const handleAddToCart = async () => {
         const res = await addItemToCart(props.token, props.itemId, quantity);
@@ -14,12 +23,12 @@ function AddToCart(props){
             alert(res.message);
         }else{
             alert('Item added in cart');
-
+            setIsAddedToCart(true);
         }
     }
 
     const increaseQuantity = () => {
-        const newQuantity = quantity + 1;
+        let newQuantity = quantity + 1;
         if(newQuantity > 10)
             newQuantity = 10;
 
@@ -27,7 +36,7 @@ function AddToCart(props){
     }
 
     const decreaseQuantity = () => {
-        const newQuantity = quantity-1;
+        let newQuantity = quantity-1;
         if(newQuantity < 0)
             newQuantity = 0;
 
@@ -73,8 +82,6 @@ export default function Menu() {
 
         menu();
     }, [])
-
-
 
     return (
         <>
