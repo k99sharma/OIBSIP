@@ -1,20 +1,21 @@
 import { useContext, useEffect, useState } from "react";
-import { getCartItems } from "../../utils/helper";
+import { getCartItems, calculateOrderPrice } from "../../utils/helper";
+import { displayRazorpay } from "../../utils/razorpay";
 import AuthContext from '../../store/auth-context';
 
-import { calculateOrderPrice } from "../../utils/helper";
 
-
-function PlaceOrder(){
-    const handleOrder = () => {
-        alert('Order Placed');
+function PlaceOrder(props) {
+    const handleOrderPlacement = async () => {
+        displayRazorpay(props);
     }
 
-    return(
+    return (
         <>
-            <button onClick = {handleOrder}>
-                Place Order
-            </button>
+            {
+                <button onClick={handleOrderPlacement}>
+                    {`Pay ${props.orderPrice}`}
+                </button>
+            }
         </>
     )
 }
@@ -22,6 +23,7 @@ function PlaceOrder(){
 export default function Cart() {
     const [items, setItems] = useState([]);
     const [price, setPrice] = useState(0);
+    const [isOrderPlaced, setIsOrderPlaced] = useState(false);
     const authCtx = useContext(AuthContext);
 
     useEffect(() => {
@@ -40,6 +42,8 @@ export default function Cart() {
     useEffect(() => {
         setPrice(calculateOrderPrice(items));
     }, [items])
+
+    useEffect(() => {}, [isOrderPlaced])
 
     return (
         <>
@@ -63,13 +67,25 @@ export default function Cart() {
                 })
             }
 
-            <div>
-                <strong>Order Price: </strong> {price}
-            </div>
+            {
+                items.length > 0
+                ?
+                <>
+                    <div>
+                        <strong>Order Price: </strong> {price}
+                    </div>
 
-            <div>
-                <PlaceOrder />
-            </div>
+                    <div>
+                        <PlaceOrder token={authCtx.token} setIsOrderPlaced={setIsOrderPlaced} orderPrice={price} />
+                    </div>
+                </>
+                :
+                <>
+                    <div>
+                        <strong>CART IS EMPTY</strong>
+                    </div>
+                </>
+            }
         </>
     );
 }
