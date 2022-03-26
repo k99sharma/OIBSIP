@@ -31,5 +31,28 @@ export const logoutUser = async (token) => {
             'x-auth-token': token,
         }
     })
-    .then(data => data.json);
+    .then(data => data.json());
 }
+
+// function to fetch menu data
+export const getMenu = async (token) => {
+    return fetch('http://localhost:8000/mountpizza/items/pizzas/getAll', {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json());
+}
+
+
+// function to add item in cart
+export const addItemToCart = async (token, itemId, quantity) => {
+    return fetch(`http://localhost:8000/mountpizza/cart/add?itemId=${itemId}&quantity=${quantity}`, {
+        method: 'POST',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json());
+} 
