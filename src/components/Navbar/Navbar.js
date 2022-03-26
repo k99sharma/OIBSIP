@@ -61,6 +61,15 @@ export default function Navbar() {
                         </Link>
                     </li>
                 }
+                                {
+                    isLoggedIn
+                    &&
+                    <li>
+                        <Link to='/cart'>
+                            Cart
+                        </Link>
+                    </li>
+                }
                 {
                     isLoggedIn
                     &&
