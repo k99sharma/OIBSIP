@@ -48,7 +48,7 @@ function App() {
             !authCtx.isLoggedIn && <Route exact path='/signup' element={<Signup />} />
           }
           {
-            !authCtx.user.role === 'ADMIN'
+            authCtx.user.role === 'ADMIN'
             &&
             authCtx.isLoggedIn
             &&

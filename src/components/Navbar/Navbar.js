@@ -59,7 +59,9 @@ export default function Navbar() {
                     isLoggedIn
                     &&
                     <li>
-                        Dashboard
+                        <Link to='/dashboard'>
+                            Dashboard
+                        </Link>
                     </li>
                 }
                 {
