@@ -31,7 +31,6 @@ export const displayRazorpay = async (props) => {
     // creating a new order
     const order = await placeOrder(props.orderPrice, props.token);
 
-    console.log(order);
     if (order.error) {
         alert("Server error. Are you online?");
         return;
