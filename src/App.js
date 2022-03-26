@@ -14,6 +14,7 @@ import Home from './Routes/Home/Home';
 import Menu from './Routes/Menu/Menu';
 import Signup from './Routes/Signup/Signup';
 import Login from './Routes/Login/Login';
+import Cart from './Routes/Cart/Cart';
 import NotFound from './Routes/404/404';
 
 
@@ -29,14 +30,15 @@ function App() {
             authCtx.isLoggedIn && <Route exact path='/menu' element={<Menu />} />
           }
           {
+            authCtx.isLoggedIn && <Route exact path='/cart' element={ <Cart /> } />
+          }
+          {
             !authCtx.isLoggedIn && <Route exact path='/login' element={ <Login /> } />
           }
           {
             !authCtx.isLoggedIn && <Route exact path='/signup' element={ <Signup /> } />
           }
-          {
-            !authCtx.isLoggedIn && <Route exact path='/cart' element={ <Cart /> } />
-          }
+
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>
