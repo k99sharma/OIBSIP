@@ -16,6 +16,7 @@ import Signup from './Routes/Signup/Signup';
 import Login from './Routes/Login/Login';
 import Cart from './Routes/Cart/Cart';
 import NotFound from './Routes/404/404';
+import { Dashboard } from './Routes/Dashboard/Dashboard';
 
 
 function App() {
@@ -25,24 +26,38 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route exact path='/' element={ <Home /> } />
+          <Route exact path='/' element={<Home />} />
           {
-            authCtx.isLoggedIn && <Route exact path='/menu' element={<Menu />} />
+            authCtx.user.role === 'CUST'
+            &&
+            authCtx.isLoggedIn 
+            && 
+            <Route exact path='/menu' element={<Menu />} />
           }
           {
-            authCtx.isLoggedIn && <Route exact path='/cart' element={ <Cart /> } />
+            authCtx.user.role === 'CUST'
+            &&
+            authCtx.isLoggedIn 
+            && 
+            <Route exact path='/cart' element={<Cart />} />
           }
           {
-            !authCtx.isLoggedIn && <Route exact path='/login' element={ <Login /> } />
+            !authCtx.isLoggedIn && <Route exact path='/login' element={<Login />} />
           }
           {
-            !authCtx.isLoggedIn && <Route exact path='/signup' element={ <Signup /> } />
+            !authCtx.isLoggedIn && <Route exact path='/signup' element={<Signup />} />
           }
-
+          {
+            !authCtx.user.role === 'ADMIN'
+            &&
+            authCtx.isLoggedIn
+            &&
+            <Route exact path='/dashboard' element={ <Dashboard /> } />
+          }
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>
-    </>  
+    </>
   );
 }
 
