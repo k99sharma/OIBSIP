@@ -105,3 +105,16 @@ export const verifyPayment = async (token, data) => {
     })
     .then(data => data.json());
 }
+
+
+// function to clear cart 
+export const clearCart = (token) => {
+    return fetch('http://localhost:8000/mountpizza/cart/clearAll', {
+        method: 'DELETE',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json());
+}
+
