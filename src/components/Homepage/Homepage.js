@@ -1,9 +1,11 @@
 import './Homepage.css';
 import { BuyNowButton } from './BuyNowButton';
 
+import { Footer } from '../Footer/Footer';
+
 function HomePageContent() {
     return (
-        <div className="homepage__content  p-5">
+        <div className="homepage__content p-5">
             <div className="homepage__content__title">
                 <div className="text-6xl font-bold my-5">
                     Order your
@@ -42,8 +44,7 @@ export function HomePage() {
         <>
             <div className="
             homepage
-            h-4/6 
-            md:h-5/6 
+            h-5/6 
             grid 
             md:grid-cols-1 
             md:items-center 
@@ -55,6 +56,8 @@ export function HomePage() {
                 <HomePageContent />
                 <HomeIllustration />
             </div>
+
+            <Footer/>
         </>
     );
 }
