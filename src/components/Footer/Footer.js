@@ -22,7 +22,7 @@ function FollowMe() {
             <div className='footer__followme mt-5'>
                 <div className='text-white mb-3'>
                     Developed & Designed by <span>
-                        <a className='text-amber-400' href="https://www.kalashsharma.me">
+                        <a className='text-amber-400' rel="noreferrer" target='_blank' href="https://www.kalashsharma.me">
                             ghost_32
                         </a>
                     </span>
@@ -32,19 +32,19 @@ function FollowMe() {
             <div className='footer__followme__links flex justify-center items-center py-3'>
                 <div className='flex'>
                     <div className='mx-2'>
-                        <a href="https://www.linkedin.com/in/kalashsharma99/" target='_blank'>
+                        <a href="https://www.linkedin.com/in/kalashsharma99/" rel="noreferrer" target='_blank'>
                             <img src="/linkedin.png" width="25px" height="25px" alt="linkedin" />
                         </a>
                     </div>
 
                     <div className='mx-2'>
-                        <a href="https://github.com/k99sharma" target='_blank'>
+                        <a href="https://github.com/k99sharma" rel="noreferrer" target='_blank'>
                             <img src="/github.png" width="25px" height="25px" alt="github" />
                         </a>
                     </div>
 
                     <div className='mx-2'>
-                        <a href="https://www.kalashsharma.me" target='_blank'>
+                        <a href="https://www.kalashsharma.me" rel="noreferrer" target='_blank'>
                             <img src="/web.png" width="25px" height="25px" alt="portfolio" />
                         </a>
                     </div>
@@ -100,9 +100,11 @@ export function Footer() {
                 </div>
 
                 <div className='footer__right flex items-center justify-items-center'>
-                    <Contact />
+                    <div>
+                        <Contact />
 
-                    <Footer />
+                        <Copyright />
+                    </div>
                 </div>
             </div>
         </>
