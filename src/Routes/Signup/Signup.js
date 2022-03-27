@@ -76,7 +76,7 @@ export default function Signup() {
                             <div className="mb-3">
                                 <label className="block">
                                     <span className="text-grey-700">Phone Number</span>
-                                    <input type='text' onChange={e => setPhoneNumber(e.target.value)} className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder='Enter Phone Number' required />
+                                    <input type='text' minLength='10' maxLength='10' onChange={e => setPhoneNumber(e.target.value)} className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder='Enter Phone Number' required />
                                 </label>
                             </div>
 
