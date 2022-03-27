@@ -1,9 +1,15 @@
+// importing css
+import './Navbar.css';
+
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 import AuthContext from '../../store/auth-context';
 import { logoutUser } from "../../utils/helper";
+import { Banner } from './Banner/Banner';
+import { AuthLink } from './AuthLink/AuthLink';
+import { MenuLink } from './MenuLink/MenuLink';
 
 
 export default function Navbar() {
@@ -15,88 +21,27 @@ export default function Navbar() {
     const handleLogout = async () => {
         const token = authCtx.token;
         const res = await logoutUser(token);
-        if(res.error){
+        if (res.error) {
             alert(res.message);
         }
-        else{
+        else {
             authCtx.logout();
-            navigator('/', {replace: true});  // redirect user after logout
+            navigator('/', { replace: true });  // redirect user after logout
         }
     }
 
     return (
-        <>
-            <div>
-                <Link to='/'>
-                    <strong>Mount Pizza</strong>
-                </Link>
+        <div className='navbar h-24 items-center flex justify-around my-3 md:my-6 p-5 md:px-28 md:py-5'>
+            <Banner />
+
+            <div className='menuLinks flex md:flex-grow md:w-5/12 ml-10'>
+                <MenuLink isLoggedIn={isLoggedIn} role={role} />
             </div>
 
-            <ul>
-                {
-                    !isLoggedIn
-                    &&
-                    <li>
-                        <Link to='/login'>
-                            Login
-                        </Link>
-                    </li>
-
-                }
-
-                {
-                    !isLoggedIn
-                    &&
-                    <li>
-                        <Link to='/signup'>
-                            Signup
-                        </Link>
-                    </li>
-                }
-                {
-                    role === 'ADMIN'
-                    &&
-                    isLoggedIn
-                    &&
-                    <li>
-                        <Link to='/dashboard'>
-                            Dashboard
-                        </Link>
-                    </li>
-                }
-                {
-                    role === 'CUST'
-                    &&
-                    isLoggedIn
-                    &&
-                    <li>
-                        <Link to='/menu'>
-                            Menu
-                        </Link>
-                    </li>
-                }
-                {
-                    role === 'CUST'
-                    &&
-                    isLoggedIn
-                    &&
-                    <li>
-                        <Link to='/cart'>
-                            Cart
-                        </Link>
-                    </li>
-                }
-                {
-                    isLoggedIn
-                    &&
-                    <li>
-                        <button onClick={handleLogout}>
-                            Logout
-                        </button>
-                    </li>
-                }
-            </ul>
+            <div className='authLinks flex md:w-2/12 justify-around'>
+                <AuthLink handler={handleLogout} isLoggedIn={isLoggedIn} />
+            </div>
             <br />
-        </>
+        </div>
     );
 }
