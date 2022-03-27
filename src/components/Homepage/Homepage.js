@@ -46,7 +46,7 @@ export function HomePage() {
             homepage
             h-5/6 
             grid 
-            md:grid-cols-1 
+            grid-cols-1 
             md:items-center 
             md:justify-items-center 
             md:grid-cols-2 
