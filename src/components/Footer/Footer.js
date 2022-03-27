@@ -92,14 +92,14 @@ function Copyright() {
 export function Footer() {
     return (
         <>
-            <div className="footer grid grid-cols-1 items-center justify-items-start md:grid-cols-2 bg-black py-10 px-28">
+            <div className="footer grid grid-cols-1 items-center justify-items-center md:grid-cols-2 bg-black py-10 px-10 md:px-28">
                 <div className='footer__left'>
                     <CompanyName />
 
                     <FollowMe />
                 </div>
 
-                <div className='footer__right flex items-center justify-items-center'>
+                <div className='footer__right flex items-center justify-items-center sm:mt-8'>
                     <div>
                         <Contact />
 
