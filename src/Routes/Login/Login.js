@@ -62,7 +62,7 @@ export default function Login() {
                             </div>
 
                             <div className="my-10">
-                                <button className="bg-black text-amber-400 py-3 px-5 rounded-full" type="submit">
+                                <button className="bg-amber-400 text-white py-3 w-24 rounded-full" type="submit">
                                     Login
                                 </button>
                             </div>
