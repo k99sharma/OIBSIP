@@ -102,7 +102,7 @@ export function Footer() {
                 <div className='footer__right flex items-center justify-items-center'>
                     <Contact />
 
-                    <Footer />
+                    <Copyright />
                 </div>
             </div>
         </>
