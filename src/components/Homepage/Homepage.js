@@ -1,5 +1,4 @@
 import './Homepage.css';
-
 import { BuyNowButton } from './BuyNowButton';
 
 function HomePageContent() {
@@ -32,11 +31,29 @@ function HomePageContent() {
     )
 }
 
+function HomeIllustration() {
+    return (
+        <div className="bg-image hidden md:block h-full w-full"></div>
+    );
+}
+
 export function HomePage() {
     return (
         <>
-            <div className="homepage h-5/6 grid md:grid-cols-1 md:items-center md:justify-items-center md:grid-cols-2 ">
+            <div className="
+            homepage
+            h-4/6 
+            md:h-5/6 
+            grid 
+            md:grid-cols-1 
+            md:items-center 
+            md:justify-items-center 
+            md:grid-cols-2 
+            bg-[url('https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] 
+            md:bg-none
+            ">
                 <HomePageContent />
+                <HomeIllustration />
             </div>
         </>
     );

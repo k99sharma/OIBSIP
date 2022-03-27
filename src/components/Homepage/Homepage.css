@@ -4,3 +4,10 @@
     font-family: 'Hurricane', cursive;
     font-size: 24px;
 }
+
+.bg-image{
+    background-image: url('/public/home.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
