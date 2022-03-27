@@ -31,7 +31,7 @@ export default function Navbar() {
     }
 
     return (
-        <div className='navbar h-24 items-center flex justify-around my-3 md:my-6 p-5 md:px-28 md:py-5'>
+        <div className='navbar h-24 items-center flex justify-around p-5 md:px-28 md:py-5'>
             <Banner />
 
             <div className='menuLinks flex md:flex-grow md:w-5/12 ml-10'>

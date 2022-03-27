@@ -22,7 +22,7 @@ import { Dashboard } from './Routes/Dashboard/Dashboard';
 function App() {
   const authCtx = useContext(AuthContext);
   return (
-    <>
+    <div className='h-screen'>
       <Router>
         <Navbar />
         <Routes>
@@ -57,7 +57,7 @@ function App() {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>
-    </>
+    </div>
   );
 }
 
