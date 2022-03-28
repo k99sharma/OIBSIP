@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Popover } from "@headlessui/react";
 import { logoutUser, titleCase } from '../../../utils/helper';
 import AuthContext from "../../../store/auth-context";
 
 function ProfileButton() {
     const authCtx = useContext(AuthContext);
+    const navigator = useNavigate();
 
     const handleLogout = async () => {
         const token = authCtx.token;
