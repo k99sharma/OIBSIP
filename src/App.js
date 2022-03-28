@@ -22,7 +22,7 @@ import { Dashboard } from './Routes/Dashboard/Dashboard';
 function App() {
   const authCtx = useContext(AuthContext);
   return (
-    <div className='h-screen'>
+    <div className='h-screen select-none'>
       <Router>
         <Navbar />
         <Routes>
