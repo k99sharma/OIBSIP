@@ -50,47 +50,12 @@ export default function Cart() {
         setPrice(calculateOrderPrice(items));
     }, [items])
 
+    const handleDeleteCartItem = () => {
+        console.log('Clicked');
+    }
+
     return (
         <>
-            {/* <div>
-                <strong>CART PAGE</strong>
-            </div><br />
-
-
-            {
-                items.map(item => {
-                    return (
-                        <div key={item._id}>
-                            <div>
-                                <strong>
-                                    {item.item.name}
-                                </strong>
-                            </div>
-                            <br />
-                        </div>
-                    );
-                })
-            }
-
-            {
-                items.length > 0
-                ?
-                <>
-                    <div>
-                        <strong>Order Price: </strong> {price}
-                    </div>
-
-                    <div>
-                        <PlaceOrder token={authCtx.token} setIsOrderPlaced={setIsOrderPlaced} orderPrice={price} />
-                    </div>
-                </>
-                :
-                <>
-                    <div>
-                        <strong>CART IS EMPTY</strong>
-                    </div>
-                </>
-            } */}
             <div className="cart p-5">
                 <div className="menu__title text-4xl font-light mb-10">
                     <span className="font-medium">Your</span> Cart
@@ -112,13 +77,16 @@ export default function Cart() {
 
                         items.map(item => {
                             return (
-                                <div className="pizza shadow-2xl rounded-3xl md:mx-3 mb-5 p-2">
+                                <div key={item._id} className="pizza shadow-2xl rounded-3xl md:mx-3 mb-5 p-2">
                                     <div className="flex justify-between items-center p-2">
-                                        <div className="text-red-500 hover:-translate-y-1 transition">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
+                                        <button onClick = { handleDeleteCartItem } className="pizza__delete">
+                                            <div className="text-red-500 hover:-translate-y-1 transition">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </button>
+
                                         <div className="text-lime-500 text-lg ">
                                             x<span className="text-2xl">{item.quantity}</span>
                                         </div>
