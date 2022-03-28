@@ -36,7 +36,7 @@ export default function Menu() {
                 <div className="menu__list grid grid-cols-1 md:grid-cols-4 my-5 p-3">
                     {
                         menuItems.map(item => {
-                            return <PizzaCard key={item.name} item={item} token={authCtx.token} />
+                            return <PizzaCard key = {item._id} item={item} token={authCtx.token} />
                         })
                     }
                 </div>

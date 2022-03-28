@@ -118,3 +118,15 @@ export const clearCart = (token) => {
     .then(data => data.json());
 }
 
+
+
+// function to delete item from cart
+export const deleteItemFromCart = (token, id) => {
+    return fetch(`http://localhost:8000/mountpizza/cart/delete?itemId=${id}`, {
+        method: 'DELETE',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json());
+}
