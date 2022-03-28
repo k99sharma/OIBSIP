@@ -25,7 +25,7 @@ export function Dashboard() {
 
 
             <div className='dashboard__menu__board p-5'>
-                <Board selectedBoard = { selectedBoard } />
+                <Board token = {authCtx.token} selectedBoard = { selectedBoard } />
             </div>
         </div>
     );

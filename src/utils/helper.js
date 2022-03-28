@@ -139,3 +139,26 @@ export const titleCase = (str) => {
     }
     return str.join(' ');
 }
+
+
+// function to get all user data
+export const getAllUsers = (token) => {
+    return fetch('http://localhost:8000/mountpizza/users/getAll', {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json());
+}
+
+// function to make user admin
+export const makeAdmin = (token, id) => {
+    return fetch(`http://localhost:8000/mountpizza/users/${id}/makeAdmin`, {
+        method: 'PUT',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json());
+}
