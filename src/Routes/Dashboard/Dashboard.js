@@ -4,46 +4,8 @@ import './Dashboard.css';
 import { useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import { titleCase } from "../../utils/helper";
-
-
-function Board() {
-    return (
-        <div className="flex justify-center items-center">
-
-        </div>
-    );
-}
-
-const menuOptions = [
-    {
-        id: 0,
-        name: 'users',
-    },
-    {
-        id: 1,
-        name: 'topping'
-    },
-    {
-        id: 2,
-        name: 'pizzas'
-    },
-]
-
-function DashboardMenuOptions(props) {
-    return (
-        <div className='flex p-5'>
-            {
-                menuOptions.map(option => {
-                    return <button onClick={ () => { props.setSelectedBoard(option.name) }} className={`hover:-translate-y-1 transition rounded-lg ${props.selectedBoard === option.name && 'bg-gray-300'}`}>
-                        <div className='mx-5 text-lg '>
-                            { titleCase(option.name) }
-                        </div>
-                    </button>
-                })
-            }
-        </div>
-    )
-}
+import { Board } from '../../components/Dashboard/Board/Board';
+import { DashboardMenuOptions } from '../../components/Dashboard/MenuNavigation/MenuNavigation';
 
 export function Dashboard() {
     const authCtx = useContext(AuthContext);
@@ -57,12 +19,14 @@ export function Dashboard() {
 
             <hr />
 
-            <div className='flex justify-center items-center'>
+            <div className='dashboard__menu__options flex justify-center items-center'>
                 <DashboardMenuOptions selectedBoard={selectedBoard} setSelectedBoard={setSelectedBoard} />
             </div>
 
 
-            <Board />
+            <div className='dashboard__menu__board p-5'>
+                <Board selectedBoard = { selectedBoard } />
+            </div>
         </div>
     );
 }
