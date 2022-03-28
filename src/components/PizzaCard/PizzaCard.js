@@ -20,7 +20,7 @@ export function PizzaCard(props) {
             <div className="pizza__toppings mb-3 px-2 flex">
                 {
                     props.item.toppings.map(topping => {
-                        return <ToppingCard topping={topping} />
+                        return <ToppingCard key={topping._id} topping={topping} />
                     })
                 }
             </div>

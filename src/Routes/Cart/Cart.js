@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { getCartItems, calculateOrderPrice } from "../../utils/helper";
+import { getCartItems, calculateOrderPrice, deleteItemFromCart } from "../../utils/helper";
 import { displayRazorpay } from "../../utils/razorpay";
 import AuthContext from '../../store/auth-context';
 
-import { ToppingCard } from '../../components/PizzaCard/ToppingCard/ToppingCard';
 
-
-function PlaceOrder(props) {
+function Pay(props) {
     const handleOrderPlacement = async () => {
         displayRazorpay(props);
     }
@@ -27,10 +25,30 @@ function PlaceOrder(props) {
     )
 }
 
+function DeleteButton(props) {
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        props.deleteItem(props.item._id);
+    }
+
+    return (
+        <>
+            <button onClick={ handleDelete } className="pizza__delete">
+                <div className="text-red-500 hover:-translate-y-1 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                    </svg>
+                </div>
+            </button>
+        </>
+    );
+}
+
 export default function Cart() {
     const [items, setItems] = useState([]);
     const [price, setPrice] = useState(0);
     const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+    const [isItemDeleted, setIsItemDeleted] = useState(false);
     const authCtx = useContext(AuthContext);
 
     useEffect(() => {
@@ -41,17 +59,26 @@ export default function Cart() {
             } else {
                 setItems(res.data);
             }
+
+            setIsItemDeleted(false);
         }
 
         fetchCartItems(authCtx.token);
-    }, [isOrderPlaced])
+    }, [isOrderPlaced, isItemDeleted])
 
     useEffect(() => {
         setPrice(calculateOrderPrice(items));
     }, [items])
 
-    const handleDeleteCartItem = () => {
-        console.log('Clicked');
+
+    const deleteItem = async (id) => {
+        const res = await deleteItemFromCart(authCtx.token, id);
+        if(res.error){
+            alert('Item not deleted');
+        }else{
+            alert('Item is deleted');
+            setIsItemDeleted(true);
+        }
     }
 
     return (
@@ -66,7 +93,7 @@ export default function Cart() {
                         ?
                         <div className="cart__orderPrice flex md:justify-end items-center mb-5 md:mb-10">
                             <div>
-                                <PlaceOrder token={authCtx.token} setIsOrderPlaced={setIsOrderPlaced} orderPrice={price} />
+                                <Pay token={authCtx.token} setIsOrderPlaced={setIsOrderPlaced} orderPrice={price} />
                             </div>
                         </div>
                         :
@@ -79,13 +106,7 @@ export default function Cart() {
                             return (
                                 <div key={item._id} className="pizza shadow-2xl rounded-3xl md:mx-3 mb-5 p-2">
                                     <div className="flex justify-between items-center p-2">
-                                        <button onClick = { handleDeleteCartItem } className="pizza__delete">
-                                            <div className="text-red-500 hover:-translate-y-1 transition">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </button>
+                                        <DeleteButton deleteItem = { deleteItem } item={item} />
 
                                         <div className="text-lime-500 text-lg ">
                                             x<span className="text-2xl">{item.quantity}</span>
