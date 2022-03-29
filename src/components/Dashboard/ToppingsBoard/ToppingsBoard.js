@@ -1,9 +1,19 @@
 import { useEffect, useState, Fragment } from "react";
 import { Dialog, Transition } from '@headlessui/react'
-import {  getAllToppings, createTopping } from '../../../utils/helper';
+import { getAllToppings, createTopping, deleteTopping } from '../../../utils/helper';
 
 
 function ToppingCard(props) {
+    const handleDelete = async () => {
+        const res = await deleteTopping(props.token, props.topping._id);
+        if (res.error) {
+            alert(res.message);
+        } else {
+            alert('Topping deleted');
+            props.setDeleted(true);
+        }
+    }
+
     return (
         <div className="topping shadow-lg rounded-lg md:mx-3 mb-3 p-2">
             <div className="toppping__image p-1 mb-2">
@@ -16,6 +26,12 @@ function ToppingCard(props) {
 
             <div className="topping__price flex justify-center items-center text-base mb-2">
                 <span className="mr-1 font-bold">Price: </span>{`₹ ${props.topping.price}.00`}
+            </div>
+
+            <div className="topping__delete flex justify-right items-center">
+                <button onClick={handleDelete} className="bg-red-500 text-white px-1 rounded-md">
+                    Delete
+                </button>
             </div>
         </div>
     );
@@ -35,9 +51,9 @@ function CreateToppingButton(props) {
             category,
         })
 
-        if(res.error){
+        if (res.error) {
             alert(res.message);
-        }else{
+        } else {
             alert('Topping is created!');
             closeModal();
             props.setNew(true);
@@ -126,7 +142,7 @@ function CreateToppingButton(props) {
 
                                         <div className="mb-3">
                                             <input type="checkbox" className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50" />
-                                                <span className="ml-2">Is Vegetarian</span>
+                                            <span className="ml-2">Is Vegetarian</span>
                                         </div>
 
                                         <div className="mt-4">
@@ -148,15 +164,32 @@ function CreateToppingButton(props) {
     );
 }
 
+function NoTopping() {
+    return (
+        <>
+            <div className="noTopping grid grid-cols-1 justify-items-center items-center bg-white rounded-lg">
+                <div className="mb-5">
+                    <img className="w-52 h-52" src='/topping.png' alt='no topping' />
+                </div>
+
+                <div className="text-4xl font-bold mb-10">
+                    No Toppings Found!
+                </div>
+            </div>
+        </>
+    )
+}
+
 export function ToppingBoard(props) {
     const [toppingList, setToppingList] = useState([]);
     const [isNewCreated, setIsNewCreated] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false)
 
     useEffect(() => {
         const fetchToppings = async (token) => {
             const res = await getAllToppings(token);
             if (res.error) {
-                alert(res.message);
+                console.log(res.message)
             } else {
                 setToppingList(res.data);
             }
@@ -164,23 +197,33 @@ export function ToppingBoard(props) {
 
         fetchToppings(props.token);
         setIsNewCreated(false);
-    }, [isNewCreated])
+        setIsDeleted(false);
+    }, [isNewCreated, isDeleted])
 
     return (
         <div className="toppings">
             <div className="toppings__options flex p-2 rounded-md mb-3 bg-white">
-                <CreateToppingButton setNew = { setIsNewCreated } token = { props.token } />
+                <CreateToppingButton setNew={setIsNewCreated} token={props.token} />
             </div>
 
-            <div className="toppings__board p-2 bg-white">
-                <div className="grid grid-cols-1 justify-items-center items-center md:grid-cols-6">
-                    {
-                        toppingList.map(topping => {
-                            return <ToppingCard isDeleted={setIsNewCreated} key={topping._id} topping={topping} token={props.token} />
-                        })
-                    }
-                </div>
-            </div>
+
+            {
+                toppingList.length !== 0
+                    ?
+                    <div className="toppings__board p-2 bg-white">
+                        <div className="grid grid-cols-1 justify-items-center items-center md:grid-cols-6">
+                            {
+                                toppingList.map(topping => {
+                                    return <ToppingCard setDeleted={setIsDeleted} setNew={setIsNewCreated} key={topping._id} topping={topping} token={props.token} />
+                                })
+
+                            }
+                        </div>
+                    </div>
+                    :
+                    <NoTopping />
+            }
+
         </div>
     );
 }
