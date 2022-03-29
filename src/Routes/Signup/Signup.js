@@ -89,7 +89,7 @@ export default function Signup() {
 
                             <div className="mt-6">
                                 <button className="py-3 w-24 bg-sky-400 text-white rounded-full" type="submit">
-                                    Login
+                                    Sign Up
                                 </button>
                             </div>
                         </form>
