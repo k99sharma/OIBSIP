@@ -7,7 +7,7 @@ const menuOptions = [
     },
     {
         id: 1,
-        name: 'topping'
+        name: 'toppings'
     },
     {
         id: 2,
@@ -20,7 +20,7 @@ export function DashboardMenuOptions(props) {
         <div className='flex p-5'>
             {
                 menuOptions.map(option => {
-                    return <button key={option.id} onClick={ () => { props.setSelectedBoard(option.name) }} className={`hover:-translate-y-1 transition rounded-lg ${props.selectedBoard === option.name && 'bg-gray-300'}`}>
+                    return <button key={option.id} onClick={ () => { props.setSelectedBoard(option.name) }} className={`hover:-translate-y-1 transition rounded-lg ${props.selectedBoard === option.name && 'bg-amber-300'}`}>
                         <div className='mx-5 text-lg '>
                             { titleCase(option.name) }
                         </div>

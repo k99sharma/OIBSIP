@@ -162,3 +162,38 @@ export const makeAdmin = (token, id) => {
     })
     .then(data => data.json());
 }
+
+// function to fetch all toppings
+export const getAllToppings = (token) => {
+    return fetch('http://localhost:8000/mountpizza/items/toppings/getAll', {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json());
+}
+
+// function to delete topping
+export const deleteTopping = (token, id) => {
+    return fetch(`http://localhost:8000/mountpizza/items/toppings/${id}/delete`, {
+        method: 'DELETE',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json());
+}
+
+// function to create topping
+export const createTopping = (token, data) => {
+    return fetch('http://localhost:8000/mountpizza/items/toppings/create', {
+        method: 'POST',
+        headers: {
+            'x-auth-token': token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(data => data.json());
+}
