@@ -74,11 +74,9 @@ function CreateToppingButton(props) {
                 <button
                     type="button"
                     onClick={openModal}
-                    className="px-4 py-2 text-lime-500 hover:-translate-y-1 transition"
+                    className="px-4 py-2 hover:-translate-y-1 transition bg-lime-300 hover:bg-lime-500 text-lime-800 rounded-md"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
-                    </svg>
+                    New
                 </button>
             </div>
 
@@ -116,7 +114,7 @@ function CreateToppingButton(props) {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-2xl bg-white">
                                 <Dialog.Title
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
@@ -202,7 +200,7 @@ export function ToppingBoard(props) {
 
     return (
         <div className="toppings">
-            <div className="toppings__options flex p-2 rounded-md mb-3 bg-white">
+            <div className="toppings__options flex p-2 rounded-md mb-3">
                 <CreateToppingButton setNew={setIsNewCreated} token={props.token} />
             </div>
 
