@@ -36,8 +36,8 @@ function Pay(props) {
     return (
         <>
             {
-                <button onClick={handleOrderPlacement} className="bg-black text-white hover:-translate-y-1 transition flex justify-center items-center w-40 py-2 md:mr-10 rounded-full">
-                    <div className="bg-amber-400 px-3 py-3 rounded-full mr-7 text-black font-bold text-lg">
+                <button onClick={handleOrderPlacement} className="bg-green-300 hover:bg-green-400 text-green-800 shadow-md text-white hover:-translate-y-1 transition flex justify-center items-center w-40 py-2 md:mr-10 rounded-md">
+                    <div className="text-xl font-bold flex items-center justify-center mx-2">
                         Pay
                     </div>
                     <div className="font-bold text-xl">

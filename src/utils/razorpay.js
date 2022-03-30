@@ -44,7 +44,8 @@ export const displayRazorpay = async (props) => {
         amount: amount.toString(),
         currency: currency,
         name: "Mount Pizza",
-        description: "Test Transaction",
+        description: "Pizza Order",
+        image: '/logo512.png',
         order_id: id,
         handler: async function (response) {
             const data = {
@@ -73,7 +74,7 @@ export const displayRazorpay = async (props) => {
             email: "karl@gmail.com",
         },
         theme: {
-            color: "#61dafb",
+            color: "#fbbf24",
         },
     };
 
