@@ -19,6 +19,9 @@ export function loadScript(src) {
 
 // function to display razorpay payment window
 export const displayRazorpay = async (props) => {
+    const name = props.user.name;
+    const email = props.user.email;
+
     const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -70,8 +73,8 @@ export const displayRazorpay = async (props) => {
             props.setIsOrderPlaced(true);
         },
         prefill: {
-            name: "Karl Urban",
-            email: "karl@gmail.com",
+            name: {name},
+            email: {email},
         },
         theme: {
             color: "#fbbf24",

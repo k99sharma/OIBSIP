@@ -117,7 +117,7 @@ export default function Cart() {
                         ?
                         <div className="cart__orderPrice flex md:justify-end items-center mb-5 md:mb-10">
                             <div>
-                                <Pay token={authCtx.token} setIsOrderPlaced={setIsOrderPlaced} orderPrice={price} />
+                                <Pay token={authCtx.token} user = {authCtx.user} setIsOrderPlaced={setIsOrderPlaced} orderPrice={price} />
                             </div>
                         </div>
                         :
