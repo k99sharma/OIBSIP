@@ -6,7 +6,7 @@ export function PizzaCard(props) {
     return (
         <div className="pizza shadow-2xl rounded-3xl md:mx-3 mb-5 p-2">
             <div className="pizza__image p-3 mb-2">
-                <img className="h-48 w-full" src='' alt='' />
+                <img className="h-48 w-full" src={props.item.imageUrl} alt={props.item.name} />
             </div>
 
             <div className="pizza__name flex justify-center items-center font-bold text-lg text-gray-800 mb-1">

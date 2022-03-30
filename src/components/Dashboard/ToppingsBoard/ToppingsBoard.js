@@ -17,7 +17,7 @@ function ToppingCard(props) {
     return (
         <div className="topping shadow-lg rounded-lg md:mx-3 mb-3 p-2">
             <div className="toppping__image p-1 mb-2">
-                <img className="h-48 w-full" src='' alt='' />
+                <img className="h-48 w-full" src={props.topping.imageUrl} alt={props.topping.name} />
             </div>
 
             <div className="topping__name flex justify-center items-center font-bold text-lg text-gray-800 mb-1">
@@ -41,6 +41,7 @@ function CreateToppingButton(props) {
     let [isOpen, setIsOpen] = useState(false);
     const [name, setName] = useState(null);
     const [price, setPrice] = useState(0);
+    const [imageUrl, setImageUrl] = useState(null);
     const [category, setCategory] = useState('VEG');
 
     const handleSubmit = async (e) => {
@@ -48,6 +49,7 @@ function CreateToppingButton(props) {
         const res = await createTopping(props.token, {
             name,
             price,
+            imageUrl,
             category,
         })
 
@@ -135,6 +137,13 @@ function CreateToppingButton(props) {
                                             <label className="block">
                                                 <span className="text-grey-700">Enter Price (₹)</span>
                                                 <input type='text' onChange={e => setPrice(e.target.value)} className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder='Topping Price' required />
+                                            </label>
+                                        </div>
+
+                                        <div className="mb-3">
+                                            <label className="block">
+                                                <span className="text-grey-700">Enter Image Url</span>
+                                                <input type='text' onChange={e => setImageUrl(e.target.value)} className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder='https://' required />
                                             </label>
                                         </div>
 
