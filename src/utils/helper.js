@@ -1,6 +1,6 @@
 // function to login user
 export const loginUser = async (credentails) => {
-    return fetch('http://localhost:8000/mountpizza/auth/login', {
+    return fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -12,7 +12,7 @@ export const loginUser = async (credentails) => {
 
 // function to signup user
 export const signupUser = async (credentails) => {
-    return fetch('http://localhost:8000/mountpizza/users/create', {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export const signupUser = async (credentails) => {
 
 // function to logout user
 export const logoutUser = async (token) => {
-    return fetch('http://localhost:8000/mountpizza/auth/logout', {
+    return fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
         method: 'POST',
         headers: {
             'x-auth-token': token,
@@ -36,7 +36,7 @@ export const logoutUser = async (token) => {
 
 // function to fetch menu data
 export const getMenu = async (token) => {
-    return fetch('http://localhost:8000/mountpizza/items/pizzas/getAll', {
+    return fetch(`${process.env.REACT_APP_API_URL}/items/pizzas/getAll`, {
         method: 'GET',
         headers: {
             'x-auth-token': token,
@@ -48,7 +48,7 @@ export const getMenu = async (token) => {
 
 // function to add item in cart
 export const addItemToCart = async (token, itemId, quantity) => {
-    return fetch(`http://localhost:8000/mountpizza/cart/add?itemId=${itemId}&quantity=${quantity}`, {
+    return fetch(`${process.env.REACT_APP_API_URL}/cart/add?itemId=${itemId}&quantity=${quantity}`, {
         method: 'POST',
         headers: {
             'x-auth-token': token,
@@ -59,7 +59,7 @@ export const addItemToCart = async (token, itemId, quantity) => {
 
 // function to fetch cart items 
 export const getCartItems = async (token) => {
-    return fetch('http://localhost:8000/mountpizza/cart/getAll', {
+    return fetch(`${process.env.REACT_APP_API_URL}/cart/getAll`, {
         method: 'GET',
         headers: {
             'x-auth-token': token,
@@ -83,7 +83,7 @@ export const calculateOrderPrice = (items) => {
 
 // function to place order 
 export const placeOrder = async (amount, token) => {
-    const data = await fetch(`http://localhost:8000/mountpizza/orders/create?orderPrice=${amount}`, {
+    const data = await fetch(`${process.env.REACT_APP_API_URL}/orders/create?orderPrice=${amount}`, {
         method: 'POST',
         headers: {
             'x-auth-token': token
@@ -95,7 +95,7 @@ export const placeOrder = async (amount, token) => {
 
 // function to verify payment
 export const verifyPayment = async (token, data) => {
-    return fetch('http://localhost:8000/mountpizza/orders/payment/verify', {
+    return fetch(`${process.env.REACT_APP_API_URL}/orders/payment/verify`, {
         method: 'POST',
         headers: {
             'x-auth-token': token,
@@ -109,7 +109,7 @@ export const verifyPayment = async (token, data) => {
 
 // function to clear cart 
 export const clearCart = (token) => {
-    return fetch('http://localhost:8000/mountpizza/cart/clearAll', {
+    return fetch(`${process.env.REACT_APP_API_URL}/cart/clearAll`, {
         method: 'DELETE',
         headers: {
             'x-auth-token': token,
@@ -122,7 +122,7 @@ export const clearCart = (token) => {
 
 // function to delete item from cart
 export const deleteItemFromCart = (token, id) => {
-    return fetch(`http://localhost:8000/mountpizza/cart/delete?itemId=${id}`, {
+    return fetch(`${process.env.REACT_APP_API_URL}/cart/delete?itemId=${id}`, {
         method: 'DELETE',
         headers: {
             'x-auth-token': token,
@@ -143,7 +143,7 @@ export const titleCase = (str) => {
 
 // function to get all user data
 export const getAllUsers = (token) => {
-    return fetch('http://localhost:8000/mountpizza/users/getAll', {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/getAll`, {
         method: 'GET',
         headers: {
             'x-auth-token': token,
@@ -154,7 +154,7 @@ export const getAllUsers = (token) => {
 
 // function to make user admin
 export const makeAdmin = (token, id) => {
-    return fetch(`http://localhost:8000/mountpizza/users/${id}/makeAdmin`, {
+    return fetch(`${process.env.REACT_APP_API_URL}/users/${id}/makeAdmin`, {
         method: 'PUT',
         headers: {
             'x-auth-token': token,
@@ -165,7 +165,7 @@ export const makeAdmin = (token, id) => {
 
 // function to fetch all toppings
 export const getAllToppings = (token) => {
-    return fetch('http://localhost:8000/mountpizza/items/toppings/getAll', {
+    return fetch(`${process.env.REACT_APP_API_URL}/items/toppings/getAll`, {
         method: 'GET',
         headers: {
             'x-auth-token': token,
@@ -176,7 +176,7 @@ export const getAllToppings = (token) => {
 
 // function to delete topping
 export const deleteTopping = (token, id) => {
-    return fetch(`http://localhost:8000/mountpizza/items/toppings/${id}/delete`, {
+    return fetch(`${process.env.REACT_APP_API_URL}/items/toppings/${id}/delete`, {
         method: 'DELETE',
         headers: {
             'x-auth-token': token,
@@ -187,7 +187,7 @@ export const deleteTopping = (token, id) => {
 
 // function to create topping
 export const createTopping = (token, data) => {
-    return fetch('http://localhost:8000/mountpizza/items/toppings/create', {
+    return fetch(`${process.env.REACT_APP_API_URL}/items/toppings/create`, {
         method: 'POST',
         headers: {
             'x-auth-token': token,
@@ -201,7 +201,7 @@ export const createTopping = (token, data) => {
 
 // function to get all pizzas
 export const getAllPizzas = (token) => {
-    return fetch('http://localhost:8000/mountpizza/items/pizzas/getAll', {
+    return fetch(`${process.env.REACT_APP_API_URL}/items/pizzas/getAll`, {
         method: 'GET',
         headers: {
             'x-auth-token': token,
@@ -213,7 +213,7 @@ export const getAllPizzas = (token) => {
 
 // function to delete topping
 export const deletePizza = (token, id) => {
-    return fetch(`http://localhost:8000/mountpizza/items/pizzas/${id}/delete`, {
+    return fetch(`${process.env.REACT_APP_API_URL}/items/pizzas/${id}/delete`, {
         method: 'DELETE',
         headers: {
             'x-auth-token': token,
@@ -224,7 +224,7 @@ export const deletePizza = (token, id) => {
 
 // function to create topping
 export const createPizza = (token, data) => {
-    return fetch('http://localhost:8000/mountpizza/items/pizzas/create', {
+    return fetch(`${process.env.REACT_APP_API_URL}/items/pizzas/create`, {
         method: 'POST',
         headers: {
             'x-auth-token': token,
