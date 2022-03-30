@@ -113,6 +113,7 @@ function CreatePizzaButton(props) {
         } else {
             alert('Pizza is created!');
             props.setNew(true);
+            closeModal();
         }
     }
 
@@ -236,7 +237,6 @@ export function PizzasBoard(props) {
     const [pizzaList, setPizzaList] = useState([]);
     const [isNewCreated, setIsNewCreated] = useState(false);
     const [isDeleted, setIsDeleted] = useState(false);
-    const [toppingsList, setToppingsList] = useState([]);
 
 
     useEffect(() => {
@@ -255,12 +255,10 @@ export function PizzasBoard(props) {
     }, [isNewCreated, isDeleted])
 
 
-
-
     return (
         <div className="pizza">
             <div className="pizza__options flex p-2 rounded-md mb-3">
-                <CreatePizzaButton toppingsList={toppingsList} setNew={setIsNewCreated} token={props.token} />
+                <CreatePizzaButton setNew={setIsNewCreated} token={props.token} />
             </div>
             {
                 pizzaList.length !== 0
