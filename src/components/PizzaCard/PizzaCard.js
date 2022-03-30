@@ -17,7 +17,7 @@ export function PizzaCard(props) {
                 <span className="mr-1">₹</span>{`${props.item.price}.00`}
             </div>
 
-            <div className="pizza__toppings mb-3 px-2 flex">
+            <div className="pizza__toppings mb-3 px-2 flex grid-cols-3">
                 {
                     props.item.toppings.map(topping => {
                         return <ToppingCard key={topping._id} topping={topping} />
