@@ -1,6 +1,6 @@
 import { verifyPayment, clearCart, placeOrder } from "./helper";
 
-const RZP_KEY_ID = 'rzp_test_lAIUDkdEDcflFM';
+const RZP_KEY_ID = process.env.REACT_APP_RZP_KEY_ID;
 
 // razorpay checkout script
 export function loadScript(src) {
