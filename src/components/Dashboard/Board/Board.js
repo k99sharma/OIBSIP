@@ -5,14 +5,7 @@ import { getAllUsers, titleCase, makeAdmin, getAllToppings, deleteTopping, creat
 
 import { UsersBoard } from "../UsersBoard/UsersBoard";
 import { ToppingBoard } from '../ToppingsBoard/ToppingsBoard';
-
-function PizzasBoard() {
-    return (
-        <div>
-            Pizzas
-        </div>
-    );
-}
+import { PizzasBoard } from "../PizzasBoard/PizzaBoard";
 
 
 export function Board(props) {

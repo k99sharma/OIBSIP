@@ -197,3 +197,72 @@ export const createTopping = (token, data) => {
     })
     .then(data => data.json());
 }
+
+
+// function to get all pizzas
+export const getAllPizzas = (token) => {
+    return fetch('http://localhost:8000/mountpizza/items/pizzas/getAll', {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json())
+}
+
+
+// function to delete topping
+export const deletePizza = (token, id) => {
+    return fetch(`http://localhost:8000/mountpizza/items/pizzas/${id}/delete`, {
+        method: 'DELETE',
+        headers: {
+            'x-auth-token': token,
+        }
+    })
+    .then(data => data.json());
+}
+
+// function to create topping
+export const createPizza = (token, data) => {
+    return fetch('http://localhost:8000/mountpizza/items/pizzas/create', {
+        method: 'POST',
+        headers: {
+            'x-auth-token': token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(data => data.json());
+}
+
+// function to correct topping labels
+export const correctToppingFormat = (data) => {
+    const result = [];
+
+    for(let i=0; i<data.length; i++){
+        const temp = {
+            value: data[i].name.toLowerCase(),
+            label: titleCase(data[i].name),
+        }
+
+        result.push(temp);
+    }
+
+    return result;
+}
+
+
+// function to convert topping name to id
+export const formatToppingNameToId = (toppings, data) => {
+    const result = [];
+
+    for(let i=0; i<toppings.length; i++){
+        for(let option=0; option<data.length; option++){
+            if(toppings[i].value.toLowerCase() === data[option].name.toLowerCase())
+                result.push(data[option]._id);
+        }
+    }
+
+
+    return result;
+}
