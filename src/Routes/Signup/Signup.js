@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import AuthContext from '../../store/auth-context';
 import { signupUser } from '../../utils/helper';
+import { Spinner } from "../../components/Spinner/Spinner";
 
 export default function Signup() {
     const [firstName, setFirstName] = useState();
@@ -14,21 +15,29 @@ export default function Signup() {
     const authCtx = useContext(AuthContext);
     const navigator = useNavigate();
 
+    const [isActive, setIsActive] = useState(false);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const res = await signupUser({
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            password
-        });
+        setIsActive(true);
 
-        if (res.error) {
-            alert(res.message);
-        } else {
-            alert('Signup Successful');
-            navigator('/login', { replace: true }); // redirect user afer sign up
+        if (!isActive) {
+            const res = await signupUser({
+                firstName,
+                lastName,
+                email,
+                phoneNumber,
+                password
+            });
+
+            if (res.error) {
+                alert(res.message);
+            } else {
+                alert('Signup Successful');
+                navigator('/login', { replace: true }); // redirect user afer sign up
+            }
+
+            setIsActive(false);
         }
     }
 
@@ -72,7 +81,7 @@ export default function Signup() {
                                 </label>
                             </div>
 
-                            
+
                             <div className="mb-3">
                                 <label className="block">
                                     <span className="text-grey-700">Phone Number</span>
@@ -88,9 +97,17 @@ export default function Signup() {
                             </div>
 
                             <div className="mt-6">
-                                <button className="py-3 w-24 bg-sky-400 text-white rounded-full" type="submit">
-                                    Sign Up
-                                </button>
+                                {
+                                    !isActive
+                                        ?
+                                        <button className="py-3 w-24 bg-sky-400 text-white rounded-full" type="submit">
+                                            Sign Up
+                                        </button>
+                                        :
+                                        <div className="flex items-center justify-center">
+                                            <Spinner />
+                                        </div>
+                                }
                             </div>
                         </form>
                     </div>
