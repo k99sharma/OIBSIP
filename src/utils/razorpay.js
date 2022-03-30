@@ -72,10 +72,6 @@ export const displayRazorpay = async (props) => {
             alert('Order is placed!');
             props.setIsOrderPlaced(true);
         },
-        prefill: {
-            name: {name},
-            email: {email},
-        },
         theme: {
             color: "#fbbf24",
         },
