@@ -79,6 +79,7 @@ function ToppingsSelect(props) {
                 isMulti
                 name='toppings'
                 options={toppingOptions}
+                required
             />
         </>
     );
@@ -96,6 +97,7 @@ function CrustSelect(props) {
                 onChange={e => props.setCrustType(e.value)}
                 name='crust'
                 options={crustOptions}
+                required
             />
         </>
     );

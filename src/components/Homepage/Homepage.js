@@ -2,8 +2,12 @@ import './Homepage.css';
 import { BuyNowButton } from './BuyNowButton';
 
 import { Footer } from '../Footer/Footer';
+import { useContext } from 'react';
+import AuthContext from '../../store/auth-context';
 
 function HomePageContent() {
+    const authCtx = useContext(AuthContext);
+
     return (
         <div className="homepage__content p-5">
             <div className="homepage__content__title">
@@ -26,9 +30,16 @@ function HomePageContent() {
                 </div>
             </div>
 
-            <div className='buyNowButton'>
-                <BuyNowButton />
-            </div>
+            {
+                authCtx.user.role !== 'ADMIN'
+
+                &&
+
+                <div className='buyNowButton'>
+                    <BuyNowButton />
+                </div>
+            }
+
         </div>
     )
 }
@@ -57,7 +68,7 @@ export function HomePage() {
                 <HomeIllustration />
             </div>
 
-            <Footer/>
+            <Footer />
         </>
     );
 }
