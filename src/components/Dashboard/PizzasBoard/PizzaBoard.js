@@ -1,9 +1,9 @@
 import { useEffect, useState, Fragment } from "react";
 import { Dialog, Transition } from '@headlessui/react'
 import { getAllPizzas, createPizza, deletePizza, getAllToppings, formatToppingNameToId } from '../../../utils/helper';
-import ReactSelect, { components } from 'react-select';
 import Select  from 'react-select';
 import { correctToppingFormat } from "../../../utils/helper";
+import { ToppingCard } from "../../PizzaCard/ToppingCard/ToppingCard";
 
 
 function PizzaCard(props) {
@@ -29,6 +29,14 @@ function PizzaCard(props) {
 
             <div className="topping__price flex justify-center items-center text-base mb-2">
                 <span className="mr-1 font-bold">Price: </span>{`₹ ${props.pizza.price}.00`}
+            </div>
+
+            <div className="pizza__toppings mb-3 px-2 flex grid-cols-3">
+                {
+                    props.pizza.toppings.map(topping => {
+                        return <ToppingCard key={topping._id} topping={topping} />
+                    })
+                }
             </div>
 
             <div className="topping__delete flex justify-right items-center">
