@@ -4,27 +4,34 @@ import { Link } from 'react-router-dom';
 
 import AuthContext from "../../store/auth-context";
 import { loginUser } from '../../utils/helper';
+import { Spinner } from "../../components/Spinner/Spinner";
 
 export default function Login() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [isActive, setIsActive] = useState(false);
     const authCtx = useContext(AuthContext); // auth context
     const navigator = useNavigate();
 
     const handleSubmit = async (e) => {
+        setIsActive(true);
         e.preventDefault();
 
-        const res = await loginUser({
-            email,
-            password
-        });
+        if (!isActive) {
+            const res = await loginUser({
+                email,
+                password
+            });
 
-        if (res.error) {
-            alert(res.message);
-        } else {
-            // calling context login handler
-            authCtx.login(res.data);
-            navigator('/', { replace: true });  // redirecting user to homepage on login
+            if (res.error) {
+                alert(res.message);
+            } else {
+                // calling context login handler
+                authCtx.login(res.data);
+                navigator('/', { replace: true });  // redirecting user to homepage on login
+            }
+
+            setIsActive(false);
         }
     }
 
@@ -50,21 +57,30 @@ export default function Login() {
                             <div className="mb-3">
                                 <label className="block">
                                     <span className="text-grey-700">Email Address</span>
-                                    <input type='email' onChange={ e => setEmail(e.target.value) } className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder='jondoe@email.com' required />
+                                    <input type='email' onChange={e => setEmail(e.target.value)} className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder='jondoe@email.com' required />
                                 </label>
                             </div>
 
                             <div className="mb-3">
                                 <label className="block">
                                     <span className="text-grey-700">Password</span>
-                                    <input type='password' onChange={ e => setPassword(e.target.value) } className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder='Password' required />
+                                    <input type='password' onChange={e => setPassword(e.target.value)} className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder='Password' required />
                                 </label>
                             </div>
 
                             <div className="my-10">
-                                <button className="bg-amber-400 text-white py-3 w-24 rounded-full" type="submit">
-                                    Login
-                                </button>
+                                {
+                                    !isActive
+                                        ?
+                                        <button className="bg-amber-400 text-white py-3 w-24 rounded-full" type="submit">
+                                            Login
+                                        </button>
+                                        :
+                                        <div className="flex items-center justify-center">
+                                            <Spinner />
+                                        </div>
+
+                                }
                             </div>
                         </form>
                     </div>
