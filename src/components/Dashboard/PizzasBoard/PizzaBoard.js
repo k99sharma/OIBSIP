@@ -1,7 +1,7 @@
 import { useEffect, useState, Fragment } from "react";
 import { Dialog, Transition } from '@headlessui/react'
 import { getAllPizzas, createPizza, deletePizza, getAllToppings, formatToppingNameToId } from '../../../utils/helper';
-import Select  from 'react-select';
+import Select from 'react-select';
 import { correctToppingFormat } from "../../../utils/helper";
 import { ToppingCard } from "../../PizzaCard/ToppingCard/ToppingCard";
 
@@ -18,9 +18,9 @@ function PizzaCard(props) {
     }
 
     return (
-        <div className="topping shadow-lg rounded-lg md:mx-3 mb-3 p-2">
-            <div className="toppping__image p-1 mb-2">
-                <img className="h-48 w-full" src='' alt='' />
+        <div className="pizza shadow-lg rounded-lg md:mx-3 mb-3 p-2">
+            <div className="pizza__image p-1 mb-2">
+                <img className="h-48 w-full" src={props.pizza.imageUrl} alt={props.pizza.name} />
             </div>
 
             <div className="topping__name flex justify-center items-center font-bold text-lg text-gray-800 mb-1">
@@ -53,13 +53,13 @@ function ToppingsSelect(props) {
     const [toppingOptions, setToppingOptions] = useState([]);
     const [toppingData, setToppingData] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         // fetch toppings data
         const fetchToppings = async (token) => {
             const res = await getAllToppings(token);
-            if(res.error){
+            if (res.error) {
                 alert(res.message);
-            }else{
+            } else {
                 setToppingOptions(correctToppingFormat(res.data));
                 setToppingData(res.data);
             }
@@ -67,7 +67,7 @@ function ToppingsSelect(props) {
         fetchToppings(props.token);
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         const ids = formatToppingNameToId(toppingsName, toppingData)
         props.setToppings(ids);
     }, [toppingsName])
@@ -75,28 +75,27 @@ function ToppingsSelect(props) {
     return (
         <>
             <Select
-            onChange = { e => setToppingsName(e) }
+                onChange={e => setToppingsName(e)}
                 isMulti
-                name = 'toppings'
-                options = { toppingOptions } 
+                name='toppings'
+                options={toppingOptions}
             />
         </>
     );
 }
 
-function CrustSelect(props)
-{
+function CrustSelect(props) {
     const crustOptions = [
-        { value: 'SMALL', label: 'Small'},
-        { value: 'MEDIUM', label: 'Medium'},
-        { value: 'LARGE', label: 'Large'},
+        { value: 'SMALL', label: 'Small' },
+        { value: 'MEDIUM', label: 'Medium' },
+        { value: 'LARGE', label: 'Large' },
     ]
-    return(
+    return (
         <>
             <Select
                 onChange={e => props.setCrustType(e.value)}
-                name = 'crust'
-                options={ crustOptions }
+                name='crust'
+                options={crustOptions}
             />
         </>
     );
@@ -105,6 +104,7 @@ function CrustSelect(props)
 function CreatePizzaButton(props) {
     let [isOpen, setIsOpen] = useState(false);
     const [name, setName] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
     const [crustType, setCrustType] = useState(null);
     const [toppings, setToppings] = useState([]);
 
@@ -112,6 +112,7 @@ function CreatePizzaButton(props) {
         e.preventDefault();
         const res = await createPizza(props.token, {
             name,
+            imageUrl,
             crustType,
             toppings
         })
@@ -179,7 +180,7 @@ function CreatePizzaButton(props) {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-2xl bg-white">
+                            <div className="inline-block w-full max-w-md p-6 my-8 text-left align-middle transition-all transform shadow-xl rounded-2xl bg-white">
                                 <Dialog.Title
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
@@ -197,12 +198,26 @@ function CreatePizzaButton(props) {
                                         </div>
 
                                         <div className="mb-3">
-                                            <CrustSelect setCrustType = { setCrustType } />
+                                            <label className="block">
+                                                <span className="text-grey-700">Enter Image Url</span>
+                                                <input type='text' onChange={e => setImageUrl(e.target.value)} className="mt-1 block w-full rounded-md bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder='https://' required />
+                                            </label>
+                                        </div>
+
+
+                                        <div className="mb-3">
+                                            <label className="block">
+                                                <span className="text-grey-700">Pizza Crust Type</span>
+                                                <CrustSelect setCrustType={setCrustType} />
+                                            </label>
                                         </div>
 
                                         {/* TODO react multiselect */}
                                         <div className="mb-3">
-                                            <ToppingsSelect token = {props.token} setToppings = { setToppings } />
+                                            <label className="block">
+                                                <span className="text-grey-700">Choose Toppings</span>
+                                                <ToppingsSelect token={props.token} setToppings={setToppings} />
+                                            </label>
                                         </div>
 
 

@@ -138,7 +138,7 @@ export default function Cart() {
                                     </div>
 
                                     <div className="pizza__image p-3 mb-2">
-                                        <img className="h-48 w-full" src='' alt='' />
+                                        <img className="h-48 w-full" src={item.item.imageUrl} alt={item.item.name} />
                                     </div>
 
                                     <div className="pizza__name flex justify-center items-center font-bold text-lg text-gray-800 mb-1">
