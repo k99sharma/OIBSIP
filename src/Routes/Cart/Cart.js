@@ -36,9 +36,9 @@ function Pay(props) {
     return (
         <>
             {
-                <button onClick={handleOrderPlacement} className="bg-green-300 hover:bg-green-400 text-green-800 shadow-md text-white hover:-translate-y-1 transition flex justify-center items-center w-40 py-2 md:mr-10 rounded-md">
+                <button onClick={handleOrderPlacement} className="bg-lime-300 hover:bg-lime-400 text-lime-800 shadow-md text-white hover:-translate-y-1 transition flex justify-center items-center w-40 py-2 md:mr-10 rounded-md">
                     <div className="text-xl font-bold flex items-center justify-center mx-2">
-                        Pay
+                        Pay ₹
                     </div>
                     <div className="font-bold text-xl">
                         {props.orderPrice}
@@ -117,7 +117,7 @@ export default function Cart() {
                         ?
                         <div className="cart__orderPrice flex md:justify-end items-center mb-5 md:mb-10">
                             <div>
-                                <Pay token={authCtx.token} setIsOrderPlaced={setIsOrderPlaced} orderPrice={price} />
+                                <Pay token={authCtx.token} user = {authCtx.user} setIsOrderPlaced={setIsOrderPlaced} orderPrice={price} />
                             </div>
                         </div>
                         :
