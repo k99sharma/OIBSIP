@@ -2,7 +2,11 @@
 
 <p align='center'>
   <a href="https://opensource.org/licenses/MIT">
-  <img alt="License" src="https://img.shields.io/github/license/k99sharma/OIBSIP"/>
+    <img alt="License" src="https://img.shields.io/github/license/k99sharma/OIBSIP"/>
+  </a>
+  
+  <a href="https://app.netlify.com/sites/mountpizza/deploys">
+    <img alt="deploy" src="https://img.shields.io/netlify/72c40fed-3dfa-42ad-9c2b-b2d954ec4ba9" />
   </a>
  
   <a>
