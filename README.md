@@ -15,7 +15,7 @@
 </p>
 
 <p align='center'>
-  🍕 Pizza delivery application created using the MERN stack. It has a user as well as an admin module and integrated razorpay payment method.
+  🍕 Mount Pizza is a pizza ordering application created using the MERN stack. User can create an account and add pizzas to cart from menu and proceed to checkout. Admin can add new toppings and create new pizzas for users. Admin can also access all user information.
 </p>
 
 ![Screenshot (55)](https://user-images.githubusercontent.com/54969439/160991711-50dcdc64-411d-4ac6-b138-637844164a7f.png)
@@ -25,10 +25,32 @@
 - [TailwindCSS](https://tailwindcss.com/) library is used for CSS framework.
 - [Razorpay](https://razorpay.com/) is used for payment method integration.
 
-## Features
-- Login and Signup Feature using JWT authentication.
-- Responsive Design for mobile devices.
+## How to setup locally
+- Clone the github repo
+  ```
+  git clone https://github.com/k99sharma/OIBSIP.git
+  ```
+- Move into the directory
+  ```
+  cd OIBSIP
+  ```
+- Install dependecies
+  ```
+  npm install
+  ```
+- Create an environment variable file name `.env`
+- Copy all the keys from `.env.sample` and put it in `.env` and all required values.
+- Run the application
+  ```
+  npm run start
+  ```
+ - Now you are good to go!
 
+
+
+## Features
+- Login and Signup Feature using JSON Web Token authentication.
+- Responsive Design for mobile devices.
 
 ### USER
 - Cart System is based on shopping cart system in an e-commerce website.
